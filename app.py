@@ -5,8 +5,12 @@ from transformers import pipeline
 
 app = Flask(__name__)
 
-# Load QA model once at startup
-qa_pipeline = pipeline("question-answering")
+# ✅ Load lightweight TinyBERT QA model
+qa_pipeline = pipeline(
+    "question-answering",
+    model="mrm8488/bert-tiny-5-finetuned-squadv2",
+    tokenizer="mrm8488/bert-tiny-5-finetuned-squadv2"
+)
 
 @app.route('/')
 def index():
@@ -29,7 +33,6 @@ def upload():
                 text += page.get_text()
             doc.close()
 
-        # Send extracted text to frontend
         return render_template("index.html", extracted_text=text)
 
     return "No file uploaded."
