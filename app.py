@@ -5,11 +5,10 @@ from transformers import pipeline
 
 app = Flask(__name__)
 
-# ✅ Load lightweight TinyBERT QA model
+# ✅ Load lightweight DistilBERT QA model (Render-safe)
 qa_pipeline = pipeline(
     "question-answering",
-    model="mrm8488/bert-tiny-5-finetuned-squadv2",
-    tokenizer="mrm8488/bert-tiny-5-finetuned-squadv2"
+    model="distilbert-base-cased-distilled-squad"
 )
 
 @app.route('/')
