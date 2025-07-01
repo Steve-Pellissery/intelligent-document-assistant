@@ -1,8 +1,11 @@
 services:
   - type: web
     name: intelligent-document-assistant
+    env: python
     runtime: python
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn app:app"
-    
+    envVars:
+      - key: PORT
+        value: 10000
     plan: free
